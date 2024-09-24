@@ -11,6 +11,26 @@ const routes: Routes = [
     redirectTo: 'home',
     pathMatch: 'full'
   },
+  {
+    path: 'home-estudiante',
+    loadChildren: () => import('./home-estudiante/home-estudiante.module').then( m => m.HomeEstudiantePageModule)
+  },
+  {
+    path: 'escanear-qr',
+    loadChildren: () => import('./escanear-qr/escanear-qr.module').then( m => m.EscanearQrPageModule)
+  },
+  {
+    path: 'confirma-asistencia',
+    loadChildren: () => import('./confirma-asistencia/confirma-asistencia.module').then( m => m.ConfirmaAsistenciaPageModule)
+  },
+  {
+    path: 'home-profesor',
+    loadChildren: () => import('./home-profesor/home-profesor.module').then( m => m.HomeProfesorPageModule)
+  },
+  {
+    path: 'listado-presentes',
+    loadChildren: () => import('./listado-presentes/listado-presentes.module').then( m => m.ListadoPresentesPageModule)
+  },
 ];
 
 @NgModule({
