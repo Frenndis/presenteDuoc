@@ -1,13 +1,28 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>escanearQr</ion-title>
+    <ion-title>Home Estudiante</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">escanearQr</ion-title>
+      <ion-title size="large">Home Estudiante</ion-title>
     </ion-toolbar>
   </ion-header>
+
+  <div id="container" style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; padding: 16px;">
+    <ion-card style="width: 100%; max-width: 400px; text-align: center;">
+      <ion-card-header>
+        <ion-card-title>Bienvenido Estudiante!</ion-card-title>
+        <ion-card-subtitle>Presione el botón para escanear su código QR para la asistencia</ion-card-subtitle>
+      </ion-card-header>
+
+      <ion-card-content>
+        <ion-button expand="block" (click)="navegaConfirmaAsistencia()" style="margin-top: 20px;">
+          Escanear Código QR
+        </ion-button>
+      </ion-card-content>
+    </ion-card>
+  </div>
 </ion-content>

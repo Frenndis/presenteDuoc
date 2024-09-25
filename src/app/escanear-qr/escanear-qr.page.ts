@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import {Router, NavigationExtras} from '@angular/router' ;
+import { FormControl,FormGroup,Validators } from '@angular/forms';
+
 
 @Component({
   selector: 'app-escanear-qr',
@@ -7,7 +10,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EscanearQrPage implements OnInit {
 
-  constructor() { }
+  constructor(private router: Router) {}
+
+  navegaConfirmaAsistencia(){ 
+    this.router.navigate(['/confirma-asistencia']);
+  }
 
   ngOnInit() {
   }

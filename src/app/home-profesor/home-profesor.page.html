@@ -1,30 +1,32 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>homeProfesor</ion-title>
+    <ion-title>Home Profesor</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">homeProfesor</ion-title>
+      <ion-title size="large">Home Profesor</ion-title>
     </ion-toolbar>
   </ion-header>
 
-  <ion-card>
-    <ion-card-header>
-      <ion-card-title>Bienvenido Profesor</ion-card-title>
-      <ion-card-subtitle>Sleccione su ramo</ion-card-subtitle>
-    </ion-card-header>
-  
-    <ion-card-content>
-      Here's a small text description for the card content. Nothing more, nothing less.
-    </ion-card-content>
-  </ion-card>
+  <div id="container" style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; padding: 16px;">
+    <ion-card style="width: 100%; max-width: 400px; text-align: center;">
+      <ion-card-header>
+        <ion-card-title>Bienvenido Profesor!</ion-card-title>
+        <ion-card-subtitle>Tu correo es: {{ correo }}</ion-card-subtitle> <!-- Muestra el correo aquí -->
+        <ion-card-subtitle>Seleccione su ramo</ion-card-subtitle>
+      </ion-card-header>
 
-  <ion-card button>
-    <ion-card-header>
-      <ion-card-title>Desarrollo Móvil</ion-card-title>
-    </ion-card-header>
-  </ion-card>
+      <ion-card-content>
+        <!-- Tarjeta del ramo Desarrollo Móvil -->
+        <ion-card button (click)="navegaListadoPresentes()" style="margin-top: 20px;">
+          <ion-card-header>
+            <ion-card-title>Desarrollo Móvil</ion-card-title>
+          </ion-card-header>
+        </ion-card>
+      </ion-card-content>
+    </ion-card>
+  </div>
 </ion-content>
