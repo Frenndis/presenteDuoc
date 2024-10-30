@@ -21,10 +21,10 @@
       <ion-card-content>
         <ion-list>
           <ion-item>
-            <ion-input label="Correo" labelPlacement="floating" placeholder="Enter your email" [(ngModel)]="correo"></ion-input>
-          </ion-item>
+            <ion-input label="Correo" labelPlacement="floating" placeholder="Enter your email" [(ngModel)]="user"></ion-input>
+          </ion-item>          
           <ion-item>
-            <ion-input label="Contraseña" labelPlacement="floating" type="password" placeholder="Enter your password">
+            <ion-input label="Contraseña" labelPlacement="floating" type="password" placeholder="Enter your password"  [(ngModel)]="password">
               <ion-input-password-toggle slot="end"></ion-input-password-toggle>
             </ion-input>
           </ion-item>
@@ -34,8 +34,8 @@
           Olvidaste tu contraseña? <a href="#">Recuperar</a>
         </div>
 
-        <ion-button expand="block" (click)="navegaHomeEstudiante()" style="margin-top: 20px;">Ingresar Alumno</ion-button>
-        <ion-button expand="block" (click)="navegaHomeProfesor()" style="margin-top: 10px;">Ingresar Docente</ion-button>
+        <ion-button expand="block" (click)="login()" style="margin-top: 20px;">Ingresar</ion-button>
+
       </ion-card-content>
     </ion-card>
   </div>

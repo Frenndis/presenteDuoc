@@ -1,32 +1,19 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>Home Profesor</ion-title>
+    <ion-title>Bienvenido Profesor</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Home Profesor</ion-title>
-    </ion-toolbar>
-  </ion-header>
-
-  <div id="container" style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; padding: 16px;">
-    <ion-card style="width: 100%; max-width: 400px; text-align: center;">
-      <ion-card-header>
-        <ion-card-title>Bienvenido Profesor!</ion-card-title>
-        <ion-card-subtitle>Tu correo es: {{ correo }}</ion-card-subtitle> <!-- Muestra el correo aquí -->
-        <ion-card-subtitle>Seleccione su ramo</ion-card-subtitle>
-      </ion-card-header>
-
-      <ion-card-content>
-        <!-- Tarjeta del ramo Desarrollo Móvil -->
-        <ion-card button (click)="navegaListadoPresentes()" style="margin-top: 20px;">
-          <ion-card-header>
-            <ion-card-title>Desarrollo Móvil</ion-card-title>
-          </ion-card-header>
-        </ion-card>
-      </ion-card-content>
-    </ion-card>
+  <div style="text-align: center; margin-top: 20px;">
+    <h2>Bienvenido, {{ nombre }}</h2>
   </div>
+
+  <ion-list>
+    <ion-item *ngFor="let curso of cursos" (click)="seleccionarCurso(curso.id)">
+      <ion-label>
+        {{ curso.nombre }} - Sección: {{ curso.seccion }}
+      </ion-label>
+    </ion-item>
+  </ion-list>
 </ion-content>
