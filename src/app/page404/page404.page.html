@@ -1,13 +1,13 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>Login</ion-title>
+    <ion-title>Pagina No encontrada</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">Login</ion-title>
+      <ion-title size="large">Error 404</ion-title>
     </ion-toolbar>
   </ion-header>
 
@@ -15,16 +15,16 @@
     <ion-card style="width: 100%; max-width: 400px; text-align: center;">
       <ion-card-header>
         <ion-card-title>DuocUC</ion-card-title>
-        <ion-card-subtitle>Bienvenido alumno editado en arquitectura</ion-card-subtitle>
+        <ion-card-subtitle>Pagina no encontrada</ion-card-subtitle>
       </ion-card-header>
     
       <ion-card-content>
         <ion-list>
           <ion-item>
-            <ion-input label="Correo" labelPlacement="floating" placeholder="Enter your email" [(ngModel)]="user"></ion-input>
-          </ion-item>          
+            <ion-input label="Correo"></ion-input>
+          </ion-item>
           <ion-item>
-            <ion-input label="Contraseña" labelPlacement="floating" type="password" placeholder="Enter your password"  [(ngModel)]="password">
+            <ion-input label="Contraseña" labelPlacement="floating" type="password" placeholder="Enter your password">
               <ion-input-password-toggle slot="end"></ion-input-password-toggle>
             </ion-input>
           </ion-item>
@@ -34,8 +34,7 @@
           Olvidaste tu contraseña? <a href="#">Recuperar</a>
         </div>
 
-        <ion-button expand="block" (click)="login()" style="margin-top: 20px;">Ingresar</ion-button>
-
+        
       </ion-card-content>
     </ion-card>
   </div>

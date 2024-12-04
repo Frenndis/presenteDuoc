@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router'; // Asegúrate de importar ActivatedRoute
+import { Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-home-estudiante',
@@ -7,20 +8,20 @@ import { Router, ActivatedRoute } from '@angular/router'; // Asegúrate de impor
   styleUrls: ['./home-estudiante.page.scss'],
 })
 export class HomeEstudiantePage implements OnInit {
+  nombre: string = '';
 
-  correo: string = ''; // Variable para almacenar el correo
-
-  constructor(private router: Router, private route: ActivatedRoute) {} // Inyecta ActivatedRoute en el constructor
-
-  // Función para navegar a la página de escanear QR
-  navegaEscanearQr() {
-    this.router.navigate(['/escanear-qr']);
-  }
+  constructor(private route: ActivatedRoute, private router: Router) {}
 
   ngOnInit() {
-    // Recibir el parámetro 'correo' desde la URL
     this.route.queryParams.subscribe(params => {
-      this.correo = params['correo']; // Captura el parámetro 'correo'
+      if (params['nombre']) {
+        this.nombre = params['nombre'];
+      }
     });
+  }
+
+  navegaEscanearQr() {
+    // Aquí puedes definir la lógica para la navegación hacia la pantalla de escaneo de QR
+    this.router.navigate(['/escanear-qr']);
   }
 }
