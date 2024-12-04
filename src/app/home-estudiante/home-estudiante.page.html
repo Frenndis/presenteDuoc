@@ -1,34 +1,27 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>Home Estudiante</ion-title>
+  <ion-toolbar color="primary">
+    <ion-title>Bienvenido Estudiante</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Home Estudiante</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <ion-card style="margin: 20px;">
+    <ion-card-header>
+      <ion-card-subtitle style="text-align: center;">Estudiante</ion-card-subtitle>
+      <ion-card-title style="text-align: center;">Bienvenido, {{ nombre }}</ion-card-title>
+    </ion-card-header>
+  </ion-card>
 
-  <div id="container" style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; padding: 16px;">
-    <ion-card style="width: 100%; max-width: 400px; text-align: center;">
-      <ion-card-header>
-        <ion-card-title>Bienvenido Estudiante!</ion-card-title>
-        <ion-card-subtitle>Tu correo es: {{ nombre }}</ion-card-subtitle> <!-- Muestra el correo aquí -->
-        <ion-card-subtitle>Selecciona tu asignatura para estar presente</ion-card-subtitle>
-      </ion-card-header>
-
-      <ion-card-content>
-        <ion-list>
-          <!-- Tarjeta de la asignatura Programación Aplicaciones Móviles -->
-          <ion-card button (click)="navegaEscanearQr()" style="margin-top: 20px;">
-            <ion-card-header>
-              <ion-card-title>Programación Aplicaciones Móviles</ion-card-title>
-            </ion-card-header>
-          </ion-card>
-        </ion-list>
-      </ion-card-content>
-    </ion-card>
-  </div>
+  <ion-list>
+    <ion-item *ngFor="let curso of cursos" (click)="showEscanearQrAlert(curso)">
+      <ion-icon name="book-outline" slot="start"></ion-icon>
+      <ion-label>
+        <h2>{{ curso.nombre }}</h2>
+        <p>Sección: {{ curso.seccion }}</p>
+      </ion-label>
+      <ion-button fill="outline" slot="end" color="primary">
+        Escanear QR
+      </ion-button>
+    </ion-item>
+  </ion-list>
 </ion-content>

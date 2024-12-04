@@ -1,19 +1,36 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
+  <ion-toolbar color="primary">
     <ion-title>Bienvenido Profesor</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <div style="text-align: center; margin-top: 20px;">
-    <h2>Bienvenido, {{ nombre }}</h2>
-  </div>
+<ion-content [fullscreen]="true" class="ion-padding">
+  <ion-header collapse="condense">
+    <ion-toolbar color="primary">
+      <ion-title size="large">Bienvenido Profesor</ion-title>
+    </ion-toolbar>
+  </ion-header>
 
-  <ion-list>
-    <ion-item *ngFor="let curso of cursos" (click)="seleccionarCurso(curso.id)">
-      <ion-label>
-        {{ curso.nombre }} - Sección: {{ curso.seccion }}
-      </ion-label>
-    </ion-item>
-  </ion-list>
+  <ion-card class="ion-padding ion-text-center">
+    <ion-card-header>
+      <ion-card-title style="font-size: 1.4em;">Bienvenido, {{ nombre }}</ion-card-title>
+    </ion-card-header>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title style="font-size: 1.2em;">Tus Cursos</ion-card-title>
+    </ion-card-header>
+
+    <ion-list lines="full">
+      <ion-item *ngFor="let curso of cursos" button (click)="seleccionarCurso(curso.id)">
+        <ion-icon slot="start" name="book-outline" color="secondary"></ion-icon>
+        <ion-label>
+          <h2>{{ curso.nombre }}</h2>
+          <p>Sección: {{ curso.seccion }}</p>
+        </ion-label>
+        <ion-icon name="arrow-forward-outline" slot="end" color="primary"></ion-icon>
+      </ion-item>
+    </ion-list>
+  </ion-card>
 </ion-content>

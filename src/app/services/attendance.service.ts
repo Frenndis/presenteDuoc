@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class AttendanceService {
-  private apiUrl = 'http://localhost:5000'; // Base URL de la API Flask
+  private apiUrl = 'https://k1cg7j8b-5000.brs.devtunnels.ms'; // Base URL de la API Flask
 
   constructor(private http: HttpClient) {}
 
@@ -21,4 +21,9 @@ export class AttendanceService {
   markAsPresent(alumno_id: number, codigo: string, seccion: string): Observable<any> {
     return this.http.post<any>(`${this.apiUrl}/registrar_asistencia`, { alumno_id, codigo, seccion });
   }
+
+  getCursosAlumno(alumnoId: number): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiUrl}/alumnos/${alumnoId}/cursos`);
+  }
+  
 }

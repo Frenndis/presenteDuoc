@@ -1,17 +1,28 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>Listado Presentes</ion-title>
+  <ion-toolbar color="primary">
+    <ion-title>Listado de Presentes</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-list>
+  <div style="text-align: center; margin-top: 20px;">
+    <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://www.example.com" alt="Código QR" />
+  </div>
+
+  <ion-list lines="full">
     <ion-item *ngFor="let estudiante of estudiantes">
+      <ion-avatar slot="start">
+        <ion-icon name="person-circle-outline" size="large"></ion-icon>
+      </ion-avatar>
       <ion-label>
-        {{ estudiante.nombre }} - 
-        <span *ngIf="estudiante.status === 0">Ausente</span>
-        <span *ngIf="estudiante.status === 1">Presente</span>
+        <h2>{{ estudiante.nombre }}</h2>
+        <p [ngStyle]="{ color: estudiante.status === 1 ? 'green' : 'red' }">
+          {{ estudiante.status === 1 ? 'Presente' : 'Ausente' }}
+        </p>
       </ion-label>
+      <ion-badge color="{{ estudiante.status === 1 ? 'success' : 'danger' }}" slot="end">
+        {{ estudiante.status === 1 ? 'Presente' : 'Ausente' }}
+      </ion-badge>
     </ion-item>
   </ion-list>
 </ion-content>

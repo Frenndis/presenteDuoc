@@ -18,22 +18,38 @@ profesores = [
                 "nombre": "Matemáticas",
                 "codigo": "PGY0000",
                 "seccion": "013V",
-                "alumnos_ids": [2]
-                
+                "alumnos": [
+                    {"id": 2, "status": 0},
+                    {"id": 3, "status": 0}
+                ]
             },
             {
                 "id": 2,
                 "nombre": "Fisica",
                 "codigo": "PGY0001",
                 "seccion": "015V",
-                "alumnos_ids": [2]
+                "alumnos": [
+                    {"id": 2, "status": 0}
+                ]
             },
             {
                 "id": 3,
                 "nombre": "Quimica",
                 "codigo": "PGY0002",
                 "seccion": "018V",
-                "alumnos_ids": [2]
+                "alumnos": [
+                    {"id": 2, "status": 0}
+                ]
+            },
+            {
+                "id": 4,
+                "nombre": "App Movil",
+                "codigo": "MDY002",
+                "seccion": "011V",
+                "alumnos": [
+                    {"id": 2, "status": 0},
+                    {"id": 3, "status": 0}
+                ]
             }
         ]
     }
@@ -53,6 +69,14 @@ usuarios = [
         "user": "alumno",
         "password": "password2",
         "nombre": "Luis Gonzalez",
+        "perfil": 2,
+        "correo": "alumno@gmail.com"
+    },
+    {
+        "id": 3,
+        "user": "alumno2",
+        "password": "password3",
+        "nombre": "Eros Gonzalez",
         "perfil": 2,
         "correo": "alumno@gmail.com"
     }
@@ -93,14 +117,23 @@ def obtener_alumnos_curso(profesor_id, curso_id):
     profesor = next((p for p in profesores if p["id"] == profesor_id), None)
     if not profesor:
         return jsonify({"message": "Profesor no encontrado"}), 404
+
     curso = next((c for c in profesor["cursos"] if c["id"] == curso_id), None)
     if not curso:
         return jsonify({"message": "Curso no encontrado"}), 404
-    
-    alumnos_ids = curso["alumnos_ids"]
-    alumnos = [u for u in usuarios if u["id"] in alumnos_ids and u["perfil"] == 2]
+
+    # Obtener la lista de alumnos para el curso especificado
+    alumnos = [
+        {
+            "id": alumno["id"],
+            "nombre": next((u["nombre"] for u in usuarios if u["id"] == alumno["id"]), "Desconocido"),
+            "status": alumno["status"]
+        }
+        for alumno in curso["alumnos"]
+    ]
 
     return jsonify(alumnos), 200
+
 
 
 @app.route('/registrar_asistencia', methods=['POST'])
@@ -113,16 +146,37 @@ def registrar_asistencia():
     for profesor in profesores:
         for curso in profesor["cursos"]:
             if curso["codigo"] == codigo and curso["seccion"] == seccion:
-                if alumno_id in curso["alumnos_ids"]:
-                    # Actualizar el estado del alumno en la lista de usuarios
-                    alumno = next((u for u in usuarios if u["id"] == alumno_id and u["perfil"] == 2), None)
-                    if alumno:
-                        alumno["status"] = 1  # 1 significa que está presente
-                        socketio.emit('asistencia_actualizada', {"alumno_id": alumno_id, "status": 1}, broadcast=True)
-                        return jsonify({"message": "Asistencia registrada"}), 200
+                # Buscar al alumno en la lista de alumnos del curso
+                alumno = next((a for a in curso["alumnos"] if a["id"] == alumno_id), None)
+                if alumno:
+                    # Actualizar el estado del alumno a presente
+                    alumno["status"] = 1  # 1 significa que está presente
+                    # Emitir evento de asistencia actualizada para el curso específico y alumno específico
+                    socketio.emit('asistencia_actualizada', {"alumno_id": alumno_id, "status": 1, "curso_codigo": codigo, "seccion": seccion}, namespace='/')
+                    return jsonify({"message": "Asistencia registrada"}), 200
 
     return jsonify({"message": "No se pudo registrar la asistencia"}), 400
 
 
+
+
+@app.route('/alumnos/<int:alumno_id>/cursos', methods=['GET'])
+def obtener_cursos_alumno(alumno_id):
+    cursos_asignados = []
+    for profesor in profesores:
+        for curso in profesor["cursos"]:
+            # Verificar si el alumno está en la lista de alumnos del curso
+            if any(alumno["id"] == alumno_id for alumno in curso["alumnos"]):
+                cursos_asignados.append({
+                    "id": curso["id"],
+                    "nombre": curso["nombre"],
+                    "codigo": curso["codigo"],
+                    "seccion": curso["seccion"]
+                })
+    return jsonify(cursos_asignados), 200
+
+
+
+
 if __name__ == '__main__':
-    app.run(debug=True)
+    socketio.run(app, debug=True)
